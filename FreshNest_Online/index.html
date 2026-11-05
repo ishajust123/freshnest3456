@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><title>FreshNest: cut fresh-food waste</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap">
+<style>
+:root{--bg:#F3F6FB;--card:#fff;--soft:#EAF0FA;--line:#D8E1F0;--tx:#0F1B3A;--mu:#5B6B8C;--bl:#2F6BFF;--bl2:#1F54E0;--cy:#0090B0;--gr:#12A150;--or:#D97706;--rd:#E11D48;--pu:#7C3AED;--glow:0 6px 20px rgba(47,107,255,.15);--bgfx:none}
+
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font:500 16px/1.6 Inter,system-ui,sans-serif;background:var(--bg) var(--bgfx) fixed;color:var(--tx);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) 0;overflow-x:hidden}
+:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+h1,h2,h3{margin:0;line-height:1.2}h2{font-size:24px;font-weight:800}h3{font-size:16px;font-weight:700}p{margin:.4em 0}.mu{color:var(--mu)}
+#side{position:fixed;inset:0 auto 0 0;width:260px;background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 14px;z-index:30;transition:transform .25s}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;margin-bottom:22px;padding:0 6px}
+.lt{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--bl),var(--cy));display:grid;place-items:center;box-shadow:var(--glow);font-size:20px}
+nav{display:flex;flex-direction:column;gap:4px;overflow:auto}
+nav a{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;color:var(--mu);text-decoration:none;font-weight:600;font-size:14px}
+nav a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav a:hover{background:var(--soft);color:var(--tx)}nav a.on{background:linear-gradient(90deg,rgba(47,107,255,.35),rgba(0,229,255,.12));color:var(--tx);box-shadow:var(--glow)}
+.note{margin-top:auto;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:12.5px;color:var(--mu)}
+.btn{border:0;border-radius:12px;padding:11px 18px;font:700 14px Inter,system-ui;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--bl),var(--bl2));box-shadow:0 4px 12px rgba(47,107,255,.35);transition:transform .1s}
+.btn:active{transform:scale(.96)}.btn.gh{background:transparent;color:var(--tx);border:1px solid var(--line);box-shadow:none}.side-b{width:100%;margin-top:auto}
+#top{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 24px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ib{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--tx);cursor:pointer;font-size:18px;display:grid;place-items:center}
+#menu{display:none}
+.sp{flex:1}.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pu),var(--bl));display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff}
+#prof{display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:12px;padding:5px 12px 5px 6px;cursor:pointer;font:600 13px Inter,system-ui}
+#pm{position:absolute;right:24px;top:62px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px;display:none;min-width:160px;box-shadow:var(--glow)}
+#pm button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--tx);padding:10px;border-radius:8px;cursor:pointer;font:600 14px Inter,system-ui}#pm button:hover{background:var(--soft)}
+main{margin-left:260px;padding:26px 24px 50px;max-width:1180px}
+section{margin-bottom:46px}.sh{margin-bottom:16px}.sh .k{color:var(--cy);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;transition:box-shadow .2s,border-color .2s}.card:hover{box-shadow:var(--glow);border-color:rgba(0,229,255,.4)}
+.g{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.hero{background:linear-gradient(135deg,#1F54E0,#6B2BFF 60%,#00B8D9);border:0;color:#fff;box-shadow:0 14px 34px rgba(47,107,255,.28)}.hero h1{font-size:clamp(28px,4vw,40px);font-weight:800;margin:12px 0}
+.tag{display:inline-block;background:#FFE14D;color:#241c00;font-weight:800;font-size:12px;padding:5px 12px;border-radius:99px}.hero .btn{background:#fff;color:#1F2C6D;box-shadow:0 4px 10px rgba(0,0,0,.18);margin:6px 8px 0 0}.hero .btn.gh{background:transparent;color:#fff;border:1px solid #fff9}
+.big{font-size:54px;font-weight:800;color:var(--rd);letter-spacing:-.02em;line-height:1}
+.bar{position:relative;height:16px;background:var(--soft);border-radius:99px;margin:14px 0 6px;overflow:visible}.bar i{display:block;height:100%;border-radius:99px}
+.mk{position:absolute;top:-5px;width:3px;height:26px;background:var(--bl);border-radius:2px}
+.kpi b{display:block;font-size:28px;font-weight:800;margin-top:4px}.kpi .c1{color:var(--rd)}.kpi .c2{color:var(--gr)}.kpi .c3{color:var(--cy)}.kpi .c4{color:var(--pu)}
+.em{font-size:28px}.row{display:grid;grid-template-columns:120px 1fr 48px;gap:10px;align-items:center;margin:9px 0;font-size:14px}.row .t{height:12px;background:var(--soft);border-radius:99px;overflow:hidden}.row .t i{display:block;height:100%;border-radius:99px;transition:width .5s}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}.chip{border:1px solid var(--line);background:var(--soft);color:var(--tx);border-radius:99px;padding:8px 14px;cursor:pointer;font:600 14px Inter,system-ui}.chip.on{border-color:var(--cy);background:rgba(0,229,255,.15);box-shadow:var(--glow)}
+.lab{font-weight:700;font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
+.res b{font-size:30px;display:block}.res.best{background:linear-gradient(135deg,#1F54E0,#6B2BFF);color:#fff;border:0;box-shadow:0 12px 28px rgba(47,107,255,.3)}
+.phone{width:100%;max-width:300px;margin:auto;border:3px solid var(--cy);border-radius:30px;padding:16px;background:var(--soft);box-shadow:var(--glow)}.bub{background:var(--bl);color:#fff;border-radius:16px 16px 16px 4px;padding:12px;margin:10px 0;font-size:14px}
+input[type=range]{width:100%;accent-color:var(--cy)}input,select{background:var(--soft);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:500 14px Inter,system-ui;width:100%}label{display:block;font-weight:600;font-size:13px;margin:10px 0 4px;color:var(--mu)}label.ck{display:flex;gap:8px;align-items:center;color:var(--tx)}label.ck input{width:auto}
+.pill{display:inline-flex;gap:8px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px;font-weight:700}.dot{width:9px;height:9px;border-radius:50%;background:var(--gr);box-shadow:0 0 10px var(--gr)}.dot.o{background:var(--or);box-shadow:0 0 10px var(--or)}
+.rk{display:grid;grid-template-columns:30px 80px 1fr 52px;gap:8px;align-items:center;margin:8px 0;font-size:14px}
+.pl h3{margin:6px 0}.pl .em{display:block}.st{border-left:3px solid var(--cy);padding-left:12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:10px}summary{cursor:pointer;font-weight:700}
+.win{font-size:30px;font-weight:800}svg text{fill:var(--mu);font:600 11px Inter,system-ui}
+dialog{background:var(--card);color:var(--tx);border:1px solid var(--cy);border-radius:20px;padding:24px;width:min(420px,92vw);box-shadow:var(--glow)}dialog::backdrop{background:rgba(0,0,0,.65)}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--gr);color:var(--tx);padding:10px 18px;border-radius:12px;box-shadow:0 0 20px rgba(57,255,136,.4);display:none;z-index:60}
+#scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:25}footer{margin-left:260px;padding:20px 24px 40px;color:var(--mu);border-top:1px solid var(--line);text-align:center}
+@media(max-width:900px){#side{transform:translateX(-100%)}#side.open{transform:none}#side.open+#scrim{display:block}main,footer{margin-left:0}#menu{display:grid}#top{padding:10px 14px}main{padding:18px 14px}.pn{display:none}#pm{right:14px}}
+nav a.on{box-shadow:inset 3px 0 0 var(--cy)}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 45%),var(--card)}.card:hover{transform:translateY(-2px)}
+.sh{margin-bottom:18px}.sh .k{display:inline-block;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.25);padding:3px 12px;border-radius:99px;margin-bottom:8px}.sh h2{font-size:28px;letter-spacing:-.02em}
+.kpi{border-top:3px solid var(--bl)}.kpi:nth-child(2){border-top-color:var(--gr)}.kpi:nth-child(3){border-top-color:var(--cy)}.kpi:nth-child(4){border-top-color:var(--pu)}
+.bar{height:14px}.dot{box-shadow:0 0 0 4px rgba(57,255,136,.18)}.dot.o{box-shadow:0 0 0 4px rgba(255,159,28,.18)}
+.chip.on{box-shadow:none;background:rgba(0,229,255,.14)}.hero{border-radius:24px;padding:28px}#toast{box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lt{box-shadow:0 4px 12px rgba(47,107,255,.4)}.phone{box-shadow:0 12px 28px rgba(0,0,0,.35)}
+.card.hero{background:linear-gradient(135deg,#1F54E0,#6B2BFF 60%,#00B8D9);color:#fff}.card.res.best{background:linear-gradient(135deg,#1F54E0,#6B2BFF);color:#fff}
+.ban{background:linear-gradient(135deg,rgba(255,77,109,.14),rgba(47,107,255,.14));border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:16px}.ban p{font-size:17px;font-weight:700;margin:0}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}.flow span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px}.flow .ar{background:none;border:0;padding:0;color:var(--cy)}
+.pc{border-top:3px solid var(--rd)}.pc .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--rd);color:#fff;font-weight:800;font-size:13px;margin-bottom:6px}.pc .rs{margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--soft);font-size:13px;font-weight:600}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--mu);margin-top:12px}.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin:10px 0}.sg div{background:var(--soft);border-radius:12px;padding:10px;text-align:center;font-size:12px;color:var(--mu)}.sg b{display:block;font-size:22px;color:var(--tx)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0;background:var(--card)}.tg{padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700}.tg.s{background:rgba(143,163,199,.2);color:var(--mu)}.tg.l{background:rgba(57,255,136,.18);color:var(--gr)}#hw{max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+footer{background:var(--card);border-top:1px solid var(--line)}footer a{color:var(--cy);text-decoration:none}footer b{color:var(--tx)}.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;text-align:left;max-width:1180px;margin-bottom:18px}.fb{border-top:1px solid var(--line);padding-top:16px;margin:0;font-weight:600}
+#pg{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--bl),var(--cy),var(--gr));z-index:50}
+#crumb{font-weight:600;font-size:14px;color:var(--mu);white-space:nowrap}#crumb b{color:var(--tx)}
+#up{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);cursor:pointer;font-size:18px;display:none;z-index:40;box-shadow:var(--glow)}
+.exec{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px;padding:0;overflow:hidden}.exec>div{padding:20px 22px;border-right:1px solid var(--line)}.exec>div:last-child{border:0}.exec .k2{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.exec p{margin:6px 0 0;font-weight:600}
+main section+section{border-top:1px solid var(--line);padding-top:38px}tr:nth-child(even) td{background:rgba(143,163,199,.07)}
+@media(max-width:900px){#crumb{display:none}}
+@media print{#side,#top,#up,#pg,#scrim{display:none!important}main,footer{margin:0}body{background:#fff;color:#000}.card{break-inside:avoid}}
+#tl,#ts{padding:9px 16px}.in #tl,.in #ts,body:not(.in) #prof{display:none}
+.sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;padding:18px;border-radius:20px;border:1px dashed var(--line);background:radial-gradient(var(--line) 1px,transparent 1px) 0 0/18px 18px,var(--card)}.tile{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px}.tp{font-size:30px;font-weight:800}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<div id="pg"></div><aside id="side"><div class="logo"><div class="lt">🌿</div>FreshNest</div><nav id="nav"></nav>
+<button class="btn side-b" id="lg">Log in</button></aside><div id="scrim"></div>
+<header id="top"><button class="ib" id="menu" aria-label="Open menu">☰</button><div class="sp"></div><div id="crumb">FreshNest / <b id="cb">Overview</b></div><div class="sp"></div>
+<button class="btn gh" id="tl">Log in</button><button class="btn" id="ts">Sign up</button><button id="prof" aria-label="Profile"><span class="av" id="avt">?</span><span class="pn" id="pn">Guest</span></button><div id="pm"></div></header>
+<main>
+<section id="overview"><h2 id="hi" style="margin-bottom:16px"></h2>
+<div class="g g2" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<div class="card hero"><span class="tag">Fresh food, fewer wasted rupees</span><h1>Let’s stop throwing away good food.</h1><p>FreshNest’s stores bin 9 of every 100 rupees of fresh food. Our plan cuts that to 5 within a year. Scroll down and try it yourself. All numbers here are sample data.</p><a class="btn" href="#try" style="display:inline-block;text-decoration:none">Try it now</a><button class="btn gh" id="rp">Replay</button></div>
+<div class="card"><div class="lab">Fresh food we throw away</div><div class="big" id="mv">9.0%</div><div class="bar"><i id="mb" style="width:60%;color:var(--rd);background:var(--rd)"></i><span class="mk" style="left:33.3%" title="Goal 5%"></span></div><div class="mu" style="font-size:12px;display:flex;justify-content:space-between"><span>0%</span><span>Goal 5%</span><span>15%</span></div><p id="mc" class="mu"></p><div class="em">🥬🍞🥛🍎🍱</div></div></div>
+<div class="g g4 kpis" style="margin-top:16px"></div><div class="card exec"><div><span class="k2" style="color:var(--rd)">The problem</span><p>We bin 9% of our fresh food because stores order by gut feeling.</p></div><div><span class="k2" style="color:var(--cy)">Our solution</span><p>Smarter daily orders, private app offers for food about to expire, and a live scoreboard.</p></div><div><span class="k2" style="color:var(--gr)">The result</span><p>Waste falls to 5% in 12 months and saves Rs. 24 crore a year. The Rs. 6 crore comes back in about 9 months if we cut 4 points.</p></div></div><div class="card" style="margin-top:16px"><h3>How to use this page</h3><div class="g g4" style="margin-top:10px"><p><b>1. Read the problem</b><br><span class="mu">See why food is binned. <a href="#problem" style="color:var(--cy)">Go</a></span></p><p><b>2. Tap and try</b><br><span class="mu">Pick a store, food and weather. <a href="#try" style="color:var(--cy)">Go</a></span></p><p><b>3. Log in, add numbers</b><br><span class="mu">Demo log-in, no password. <a href="#score" style="color:var(--cy)">Go</a></span></p><p><b>4. Check the money</b><br><span class="mu">Move the slider to see payback. <a href="#money" style="color:var(--cy)">Go</a></span></p></div></div></section>
+<section id="problem"><div class="sh"><div class="k">Step 1</div><h2>The problem</h2><p class="mu">Why does good food end up in the bin?</p></div><div class="ban"><p>In short: we order too much, fresh food spoils fast, and the extra goes in the bin.</p><div class="flow"><span>🧾 Gut-feel order</span><span class="ar">→</span><span>📦 Too much stock</span><span class="ar">→</span><span>⏳ Food spoils</span><span class="ar">→</span><span>🗑️ Into the bin</span></div></div><div class="g g4" id="ps"></div><h3 style="margin:22px 0 12px">Four reasons it happens</h3><div class="g g4" id="pc"></div>
+<div class="g g2" style="margin-top:16px"><div class="card"><h3>Where we throw away the most</h3><p class="mu">Share of each food that ends up in the bin.</p><div id="wb"></div><div class="leg"><span><i style="background:var(--rd)"></i>12% or more: fix first</span><span><i style="background:var(--bl)"></i>Under 12%</span></div></div><div class="g" id="sc"></div></div><div class="card" style="margin-top:16px"><h3>So what will we do?</h3><p class="mu">Order the right amount for each store, each food and each day. Sell food that’s about to expire through private app offers. You can try both below.</p></div></section>
+<section id="try"><div class="sh"><div class="k">Step 2</div><h2>Try it: how much should we order?</h2><p class="mu">Tap the choices. The answer changes straight away.</p></div>
+<div class="card"><div class="lab">Store</div><div class="chips" id="c1"></div><div class="lab">Food</div><div class="chips" id="c2"></div><div class="lab">Tomorrow</div><div class="chips" id="c3"></div></div>
+<div class="g g2" style="margin-top:16px"><div class="card res" id="r1"></div><div class="card res best" id="r2"></div></div><p id="gain" class="card" style="margin-top:16px;font-weight:700"></p><p><button class="btn gh" id="cp">Copy this answer</button></p></section>
+<section id="expiry"><div class="sh"><div class="k">Step 3</div><h2>Try it: sell food that’s about to expire</h2><p class="mu">Private offers on the app replace big in-store sale signs, so nobody learns to wait for discounts.</p></div>
+<div class="g g2"><div class="card"><div class="chips" id="e1"></div><label for="hrs">Hours left before it expires: <b id="hv"></b></label><input type="range" id="hrs" min="1" max="24" value="6"><p id="ed" style="font-weight:700"></p><p class="mu">Rules: never sell below cost. Max 2 offers per person each week.</p></div>
+<div class="phone"><b>📱 FreshNest app</b><div class="bub" id="eb"></div><div class="mu" style="font-size:12.5px" id="en"></div></div></div></section>
+<section id="score"><div class="sh"><div class="k">Step 4</div><h2>Scoreboard: live from the stores</h2><span class="pill"><span class="dot" id="sd"></span><span id="st">Connecting…</span></span></div>
+<div class="g g2"><div class="card"><h3>Add today’s numbers</h3><label for="fs">Store</label><select id="fs"></select><label for="ff">Food</label><select id="ff"></select><label for="fo">How many did we order?</label><input id="fo" type="number" min="1"><label for="fw">How many did we throw away?</label><input id="fw" type="number" min="0"><label class="ck"><input type="checkbox" id="fx"> We ran out in the evening</label><p><button class="btn" id="fb">Add to scoreboard</button></p><p class="mu" id="fm"></p></div>
+<div class="g"><div class="card"><h3>All stores together</h3><div class="big" id="nw" style="font-size:40px;color:var(--cy)"></div><p id="nm" class="mu"></p></div><div class="card"><h3>🏆 Best stores (least waste)</h3><div id="bs"></div></div><div class="card"><h3>Waste by food (all stores)</h3><div id="fb2"></div><div class="leg"><span><i style="background:var(--gr)"></i>5% or less</span><span><i style="background:var(--rd)"></i>12% or more</span></div></div><div class="card"><h3>Recent activity</h3><div id="ra"></div></div></div></div><div class="card" style="margin-top:16px"><h3>📋 All records (manager view)</h3><p class="mu" id="hc"></p><div class="sg" id="hg"></div><div class="g g3" style="margin:12px 0"><select id="hs" aria-label="Filter by store"></select><select id="hf" aria-label="Filter by food"></select><button class="btn" id="hd">Download CSV</button></div><div id="hw"><table id="ht"></table></div></div></section>
+<section id="map"><div class="sh"><div class="k">Extra</div><h2>Store map</h2><p class="mu">Each tile is a store. The colour shows how much it throws away. Positions are for illustration only.</p></div><div class="sm" id="sm"></div><div class="leg"><span><i style="background:var(--gr)"></i>5% or less</span><span><i style="background:var(--or)"></i>5% to 9%</span><span><i style="background:var(--rd)"></i>Above 9%</span></div></section>
+<section id="plan"><div class="sh"><div class="k">Step 5</div><h2>The plan: who does what</h2></div><div class="g g3" id="pp"></div><h3 style="margin:22px 0 12px">How we roll it out</h3><div class="g g3" id="ro"></div></section>
+<section id="money"><div class="sh"><div class="k">Step 6</div><h2>The money: do we get it back?</h2></div>
+<div class="g g2"><div class="card"><h3>Where the Rs. 6 crore goes (Rs. crore)</h3><div id="mb2"></div></div><div class="card"><label for="pp2" style="margin:0">How much waste do we cut? <b id="pv"></b> points</label><div class="chips" id="pre"></div><input type="range" id="pp2" min="1" max="4" step="0.5" value="4"><div class="win" id="pb"></div><div class="sg" id="mt"></div><p class="mu">Each point is worth about Rs. 6 crore a year. Savings grow evenly over 12 months. Running cost is Rs. 1.5 crore a year.</p></div></div>
+<div class="card" style="margin-top:16px"><h3>Money over 24 months (Rs. crore)</h3><svg id="ch" viewBox="0 0 640 260" width="100%" role="img" aria-label="Cumulative money over 24 months"></svg></div></section>
+<section id="glide"><div class="sh"><div class="k">Progress</div><h2>12-month glide path</h2><p class="mu">The plan is to bring waste down from 9% to 5% in even steps. The orange line shows where the scoreboard is now.</p></div><div class="card"><svg id="gl" viewBox="0 0 640 255" width="100%" role="img" aria-label="Waste target by month"></svg><p class="mu">The blue line is a plan, not a result. It assumes an even drop each month.</p></div></section>
+<section id="risk"><div class="sh"><div class="k">Step 7</div><h2>What could go wrong?</h2></div><div id="rk"></div></section>
+<section id="qa"><div class="sh"><div class="k">For judges</div><h2>Questions a judge might ask</h2></div><div id="jq"></div></section>
+</main><footer><div class="fg"><div><b>🌿 FreshNest</b><p>A student business case: cut fresh-food waste from 9% to 5% in 12 months, inside a Rs. 6 crore budget, with payback in 18 months.</p></div><div><b>Jump to</b><p><a href="#problem">The problem</a> · <a href="#try">Try it</a> · <a href="#score">Scoreboard</a> · <a href="#money">The money</a> · <a href="#risk">Risks</a></p></div><div><b>About the data</b><p>The demo log-in stays in your browser. Scoreboard numbers are saved in this page’s database. No passwords, no payments, no real customer data.</p></div></div></footer>
+<button id="up" aria-label="Back to top">↑</button><dialog id="dl"><h3 id="dt"></h3><div id="db"></div></dialog><div id="toast" role="status"></div>
+<script>
+/* ===== D: ALL SAMPLE DATA. Edit numbers here. ===== */
+const D={
+ goal:{now:9,target:5,saved:24,rev:756,budget:6,payLimit:18,runCost:1.5,perPoint:6},
+ problems:[["🧾","We order by gut feeling","Managers are rewarded for full shelves, so they over-order."],["⏳","Fresh food spoils quickly","Leafy veg and bread last only a few days."],["🏪","Every store is different","Busy stores run out in the evening. Quiet stores bin too much."],["🧩","Information is scattered","Sales, stock, the loyalty app and weather sit in different systems."]],
+ waste:[["Leafy veg",14],["Bread and cakes",12],["Ready meals",11],["Fruits",9],["Milk and curd",7]],
+ // name, emoji, base units/day, price Rs., unit, multipliers [normal,rainy,hot,festival]
+ foods:[["Leafy veg","🥬",80,40,"kg",[1,.85,.9,1.25]],["Bread and cakes","🍞",120,35,"packs",[1,.9,.95,1.3]],["Ready meals","🍱",90,90,"packs",[1,1.1,.9,1.4]],["Fruits","🍎",100,70,"kg",[1,.9,1.1,1.3]],["Milk and curd","🥛",150,30,"packs",[1,.95,1.15,1.2]]],
+ stores:[["Busy","🏬",1.4,.95,1.08],["Quiet","🏡",.6,1.3,1.0]], // name, emoji, size factor f, manager guess x, our suggestion x
+ days:["☀️ Normal day","🌧️ Rainy","🔥 Very hot","🎉 Festival"],
+ items:[["🥖 Sandwich bread","bread",45,30,60],["🥛 Curd cup","curd",40,28,80]], // label, name, price, cost, stock
+ shops:["Store 1 Mall road","Store 7 Station","Store 12 Campus gate","Store 18 Old market","Store 23 Tech park","Store 31 Lake view"],
+ seed:[[0,0,100,5],[0,2,80,4],[0,4,150,8],[1,1,120,9],[1,3,100,8],[1,0,90,7],[2,2,90,8],[2,4,150,12],[2,1,110,9],[3,0,100,16],[3,1,120,15],[3,2,80,10],[4,3,100,7],[4,4,140,10],[4,0,90,6],[5,1,100,6],[5,2,85,7],[5,3,110,9]],
+ split:[["Forecasting tool",2.0],["Price tags and sensors",2.2],["Connecting the data",.6],["Training and bonuses",.5],["App offers and privacy",.4],["Safety cushion",.3]],
+ plan:[["📣","Marketing","Arjun Shah","Sends private offers on the app. Keeps shoppers from switching to quick-delivery apps, which are pulling away 1 in 3 loyalty members."],["💰","Finance","Meera Pillai","Gives out the Rs. 6 crore in stages. Checks the money comes back in time."],["🚚","Stores and buying","Priya, Rahul, Sunita","Rolls out step by step. Always sells the oldest curd first. Orders smaller amounts for quiet stores."],["🧑‍🤝‍🧑","People and HR","Kavita Nair","Changes manager bonuses to reward sales and low waste together. Runs a 4-hour training, repeated for new joiners because staff turnover is 30%."],["💻","Technology","Vikram Desai","Rents a ready-made forecasting tool. The tech team has only 4 people and no data scientists."]],
+ steps:[["Step 1: start small","Begin with the highest-waste stores and the 8 stores with digital price tags."],["Step 2: add more stores","Add the 15 stores with cold-storage sensors. Start private app offers."],["Step 3: all 60 stores","Check results, fix problems, then go everywhere."]],
+ risks:[["Managers ignore the AI","We show the AI number next to theirs, train them, and pay bonuses on sales plus low waste."],["Messy data","We start with the cleanest data and check it every week."],["Customer privacy","We only use members who said yes, and only the data we need. We follow India’s DPDP law (the Digital Personal Data Protection law)."],["Software lock-in","We keep our own copy of the data and sign a contract that is easy to leave."],["Quick-delivery apps","We offer fresher food, no empty evening shelves, and app-only offers."]]
+};
+D.qa=[["Is this real data?","No. All numbers are sample data for a student case. The scoreboard shows which rows are sample and which were added by people."],["How do you forecast orders?","Expected sales = a base amount for the food × a store size factor × a weather factor. Busy stores order 8% extra. Quiet stores order exactly the expected amount."],["Why use app offers instead of big sale signs?","Private offers do not teach shoppers to wait for discounts. The price never goes below cost, and each person gets at most 2 offers a week."],["How do you know the money comes back?","The money calculator uses the Rs. 6 crore budget, the yearly saving for each point of waste, and the running cost. A 4-point cut pays back in about month 9. A 1-point cut does not pay back within 18 months."],["What if managers ignore the system?","We show our number next to theirs, train them, and pay bonuses on sales plus low waste."],["How do you protect customer privacy?","We only use members who said yes, and only the data we need. We follow India’s DPDP law."],["What would you build next?","A forecast trained on real sales data, safe sign-in on a server, and a public online version."]];
+const SB={url:"",key:""}; // PASTE your Supabase Project URL and anon key between the quotes (see STEPS.md)
+const $=s=>document.querySelector(s),E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const ICON={Overview:"M3 11l9-8 9 8v10H3z",Problem:"M12 9v4M12 17h.01M10 3L2 19h20z",Try:"M5 3l14 9-14 9z",Expiry:"M12 6v6l4 2M12 22a10 10 0 100-20 10 10 0 000 20",Score:"M4 20V10M10 20V4M16 20v-8M22 20H2",Plan:"M9 11l3 3 8-8M4 4h10v4H4zM4 12h4v8H4z",Money:"M12 2v20M17 6H9a3 3 0 000 6h6a3 3 0 010 6H7",Risk:"M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6z"};
+const NAV=[["overview","Overview","Overview"],["problem","The problem","Problem"],["try","Try it","Try"],["expiry","Expiry offers","Expiry"],["score","Scoreboard","Score"],["map","Store map","Score"],["plan","The plan","Plan"],["money","The money","Money"],["glide","Glide path","Money"],["risk","What could go wrong","Risk"],["qa","Judge Q&A","Plan"]];
+NAV.forEach(([id,t,i])=>{const a=E("a");a.href="#"+id;a.dataset.id=id;a.innerHTML='<svg viewBox="0 0 24 24"><path d="'+ICON[i]+'"/></svg>';a.append(t);$("#nav").append(a);a.onclick=()=>$("#side").classList.remove("open")});
+/* reusable helpers */
+function chips(box,list,start,fn){let cur=start;const draw=()=>{box.replaceChildren();list.forEach((t,i)=>{const b=E("button","chip"+(i===cur?" on":""),t);b.onclick=()=>{cur=i;draw();fn(i)};box.append(b)})};draw();fn(cur)}
+function bars(box,items,max,color,fmt){box.replaceChildren();items.forEach(([n,v])=>{const r=E("div","row"),t=E("div","t"),i=E("i");i.style.width=Math.min(100,v/max*100)+"%";i.style.background=color(v);t.append(i);r.append(E("span",null,n),t,E("b",null,fmt(v)));box.append(r)})}
+const toast=m=>{const t=$("#toast");t.textContent=m;t.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display="none",2600)};
+/* overview */
+$(".kpis").append(...[["Fresh waste now","9%","c1"],["Goal in 12 months","5%","c2"],["Saved each year","Rs. 24 crore","c3"],["Fresh revenue protected","Rs. 756 crore","c4"]].map(([l,v,c])=>{const d=E("div","card kpi");d.append(E("span","mu",l),E("b",c,v));return d}));
+let raf;function meter(){cancelAnimationFrame(raf);const a=D.goal.now,b=D.goal.target,mv=$("#mv"),mb=$("#mb"),mc=$("#mc");mc.textContent="Right now we bin 9 of every 100 rupees.";
+ const set=p=>{const v=a+(b-a)*p;mv.textContent=v.toFixed(1)+"%";mb.style.width=v/15*100+"%";const col=p<.5?"var(--rd)":p<1?"var(--or)":"var(--gr)";mb.style.background=col;mb.style.color=col;mv.style.color=col;if(p>=1)mc.textContent="Our goal: only 5 rupees binned. That saves Rs. 24 crore a year."};
+ set(0);if(matchMedia("(prefers-reduced-motion:reduce)").matches){set(1);return}
+ setTimeout(()=>{const t0=performance.now(),f=n=>{const p=Math.min(1,(n-t0)/2200);set(1-Math.pow(1-p,3));if(p<1)raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f)},800)}
+$("#rp").onclick=meter;meter();
+/* problem */
+const RES=["Too much stock on the shelf","Waste grows every day it sits","One plan fits no store","Nobody sees the full picture"];D.problems.forEach(([e,t,x],i)=>{const c=E("div","card pc");c.append(E("span","n",i+1),E("div","em",e),E("h3",null,t),E("p","mu",x),E("div","rs","Result: "+RES[i]));$("#pc").append(c)});[["9%","of fresh food is binned"],["Rs. 756 crore","fresh sales a year"],["1 in 3","loyalty members pulled away by quick-delivery apps"],["30%","staff turnover"]].forEach(([v,l],i)=>{const d=E("div","card kpi");d.append(E("b","c"+(i+1),v),E("span","mu",l));$("#ps").append(d)});
+bars($("#wb"),D.waste,16,v=>v>=12?"var(--rd)":"var(--bl)",v=>v+"%");
+[["🏬 Busy stores (15)",[["7%","binned"],["18%","run out in the evening"]],"They need the right amount at the right time."],["🏡 Quiet stores (20)",[["12%","binned"],["20","stores"]],"They need smaller, simpler orders."]].forEach(([t,s,x])=>{const c=E("div","card"),g=E("div","sg");s.forEach(([v,l])=>{const d=E("div");d.append(E("b",null,v),l);g.append(d)});c.append(E("h3",null,t),g,E("p","mu","Need: "+x.replace("They need ","")));$("#sc").append(c)});
+/* try it: order calculator */
+let S={s:0,f:0,w:0};
+function calc(){const [,,f,mg,us]=D.stores[S.s],[fn,em,base,price,unit,mul]=D.foods[S.f];
+ const demand=Math.round(base*f*mul[S.w]);        // expected sales
+ const guess=Math.round(base*f*mg), ours=Math.round(demand*us); // manager guess vs our suggestion
+ const waste=o=>Math.max(0,o-demand), miss=o=>Math.max(0,demand-o); // extra stock binned / sales we missed
+ const gain=(waste(guess)-waste(ours))*price+(miss(guess)-miss(ours))*price*.3; // rupee gain: waste saved + 30% of missed-sales difference
+ const show=(box,t,o)=>{box.replaceChildren(E("div","lab",t),E("b",null,o+" "+unit),E("p",null,"We expect to sell about "+demand+" "+unit+". About "+waste(o)+" "+unit+" would be binned and we would miss "+miss(o)+" "+unit+" of sales."))};
+ show($("#r1"),"A manager’s guess",guess);show($("#r2"),"Our suggestion",ours);
+ $("#gain").textContent=(gain>=0?"Our suggestion gains about Rs. ":"Our suggestion costs about Rs. ")+Math.abs(Math.round(gain)).toLocaleString("en-IN")+" for "+fn.toLowerCase()+" tomorrow in this store."}
+chips($("#c1"),D.stores.map(s=>s[1]+" "+s[0]),0,i=>{S.s=i;calc()});chips($("#c2"),D.foods.map(f=>f[1]+" "+f[0]),0,i=>{S.f=i;calc()});chips($("#c3"),D.days,0,i=>{S.w=i;calc()});
+/* expiry offer */
+let X=0;function offer(){const [lab,nm,price,cost,stock]=D.items[X],h=+$("#hrs").value;$("#hv").textContent=h;
+ let d=h<=6?30:h<=12?20:10;while(d>5&&price*(1-d/100)<cost)d-=5; // never go below cost, min 5%
+ const np=Math.round(price*(1-d/100)*100)/100;
+ $("#ed").textContent="Discount: "+d+"% off. App price Rs. "+np+" (cost Rs. "+cost+").";
+ $("#eb").textContent=lab.split(" ")[0]+" Fresh today: "+lab.slice(lab.indexOf(" ")+1)+" is "+d+"% off, just for you on the app. "+(h<=6?"Ends tonight!":"Ends in "+h+" hours!");
+ $("#en").textContent="Sent to about "+stock*3+" members who buy this. The shelf price stays Rs. "+price+"."}
+chips($("#e1"),D.items.map(i=>i[0]),0,i=>{X=i;offer()});$("#hrs").oninput=offer;
+/* login (demo only, saved in this browser) */
+let U=null,API=false;try{U=JSON.parse(localStorage.getItem("fn_user"))}catch(e){}
+const RN={store_manager:"Store manager",finance:"Finance team",student:"Student or judge"};
+const first=()=>U?U.name.trim().split(/\s+/)[0]:"guest",ini=n=>n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+function head(){document.body.classList.toggle("in",!!U);const h=new Date().getHours();$("#hi").textContent=U?(h<12?"Good morning, ":h<18?"Good afternoon, ":"Good evening, ")+first()+"!":"Hello, guest";
+ $("#avt").textContent=U?ini(U.name):"?";$("#pn").textContent=U?U.name+" · "+(RN[U.role]||U.role):"Guest";$("#lg").textContent=U?"Log out":"Log in"}
+function dlg(title,fill){$("#dt").textContent=title;$("#db").replaceChildren();fill($("#db"));if(!$("#dl").open)$("#dl").showModal()}
+const SBON=()=>!!(SB.url&&SB.key);let SBS=null;
+const sbUser=u=>({id:u.id,name:(u.user_metadata&&u.user_metadata.name)||u.email,email:u.email,role:(u.user_metadata&&u.user_metadata.role)||"student"});
+function sbSave(d){SBS={access:d.access_token,refresh:d.refresh_token};try{localStorage.setItem("fn_sb",JSON.stringify(SBS))}catch(e){}}
+const sbPub=()=>SB.key.startsWith("eyJ")?{apikey:SB.key,Authorization:"Bearer "+SB.key}:{apikey:SB.key};let sbBad=false;
+const sbFail=m=>{const e=new Error(m);e.sb=1;return e};
+/* online accounts and data with Supabase (REST calls only, no extra libraries) */
+async function sbAuth(signup,v){const res=await fetch(SB.url+"/auth/v1/"+(signup?"signup":"token?grant_type=password"),{method:"POST",headers:{apikey:SB.key,"Content-Type":"application/json"},body:JSON.stringify(signup?{email:v.email,password:v.password,data:{name:v.name,role:v.role}}:{email:v.email,password:v.password})});
+ const d=await res.json().catch(()=>({}));if(!res.ok){const t=String(d.error_description||d.msg||d.message||"");throw sbFail(/not confirmed/i.test(t)?"Please confirm your email first (check your inbox), or turn off “Confirm email” in Supabase.":/invalid login/i.test(t)?"Wrong email or password. If you signed up before, use the same password.":/already registered/i.test(t)?"This email already has an account. Click “I already have an account” and log in.":t||"Could not sign in")};
+ if(!d.access_token)throw sbFail("Account created. Please confirm your email, then log in.");sbSave(d);return sbUser(d.user)}
+async function sbRefresh(){try{if(!SBS||!SBS.refresh)return false;const r=await fetch(SB.url+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{apikey:SB.key,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:SBS.refresh})});if(!r.ok)return false;sbSave(await r.json());return true}catch(e){return false}}
+async function sbLoad(){const r=await fetch(SB.url+"/rest/v1/records?select=*&order=created_at.desc&limit=300",{headers:sbPub()});if(!r.ok)throw 0;const rs=await r.json();
+ live=rs.map(x=>({store:D.shops.indexOf(x.store),cat:D.foods.findIndex(f=>f[0].toLowerCase()===x.food),ordered:x.ordered,wasted:x.wasted,out:!!x.ran_out,ts:Date.parse(x.created_at),by:x.added_by})).filter(x=>x.store>=0&&x.cat>=0);paint()}
+const sbWho=t=>fetch(SB.url+"/auth/v1/user",{headers:{apikey:SB.key,Authorization:"Bearer "+t}});
+async function sbStart(){U=null;try{SBS=JSON.parse(localStorage.getItem("fn_sb")||"null")}catch(e){SBS=null}
+ if(SBS){let r=await sbWho(SBS.access);if(!r.ok&&await sbRefresh())r=await sbWho(SBS.access);if(r.ok)U=sbUser(await r.json());else SBS=null}
+ head();await sbLoad()}
+async function sbAdd(r){const body=JSON.stringify({store:D.shops[r.store],food:D.foods[r.cat][0].toLowerCase(),ordered:r.ordered,wasted:r.wasted,ran_out:r.out,added_by:r.by});
+ const go=()=>fetch(SB.url+"/rest/v1/records",{method:"POST",headers:{apikey:SB.key,Authorization:"Bearer "+(SBS&&SBS.access),"Content-Type":"application/json",Prefer:"return=minimal"},body});
+ let res=await go();if(res.status===401&&await sbRefresh())res=await go();if(!res.ok)throw 0}
+async function sha(t){const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+const accts=()=>{try{return JSON.parse(localStorage.getItem("fn_accts")||"{}")}catch(e){return{}}};
+/* sign-up and log-in. With the Python backend: real accounts on the server. Without it: demo accounts saved only in this browser. */
+function loginForm(signup){signup=signup===true;const draw=()=>dlg(signup?"Create your account":"Log in",b=>{
+ if(!API&&!SBON())b.append(E("p","mu","Demo accounts are saved only in this browser. Nothing is sent anywhere. Please don’t use a real password."));
+ const f=(l,t,ac)=>{const lb=E("label",null,l),i=E("input");i.type=t;i.autocomplete=ac;lb.append(i);b.append(lb);return i};
+ const n=signup?f("Name","text","name"):null,m=f("Email","email","email"),pw=f("Password"+(signup?" (at least 8 characters)":""),"password",signup?"new-password":"current-password");
+ let r=null;if(signup){const lr=E("label",null,"Role"),sel=E("select");[["store_manager","Store manager"],["finance","Finance team"],["student","Student or judge"]].forEach(([v,t])=>sel.append(new Option(t,v)));lr.append(sel);b.append(lr);r=sel}
+ const msg=E("p");msg.style.color="var(--rd)";const ok=E("button","btn",signup?"Sign up":"Log in");ok.style.marginTop="14px";
+ ok.onclick=async()=>{msg.textContent="";try{
+  if(SBON()){U=await sbAuth(signup,{name:n?n.value.trim():"",email:m.value.trim(),password:pw.value,role:r?r.value:""})}
+  else if(API){const res=await fetch("/api/auth/"+(signup?"signup":"login"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(signup?{name:n.value,email:m.value,password:pw.value,role:r.value}:{email:m.value,password:pw.value})});
+   const d=await res.json().catch(()=>({}));if(!res.ok){msg.textContent=typeof d.detail==="string"?d.detail:"Please check your details. The password needs at least 8 characters.";return}U=d}
+  else{const em=m.value.trim().toLowerCase(),A=accts();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.textContent="Please enter a valid email.";return}
+   if(signup){if(!n.value.trim()){msg.textContent="Please enter your name.";return}if(pw.value.length<8){msg.textContent="The password needs at least 8 characters.";return}if(A[em]){msg.textContent="That email is already registered. Please log in.";return}
+    const salt=crypto.getRandomValues(new Uint8Array(8)).join("");A[em]={name:n.value.trim().slice(0,40),role:r.value,salt,h:await sha(salt+pw.value)};
+    try{localStorage.setItem("fn_accts",JSON.stringify(A))}catch(e){msg.textContent="This browser can’t save accounts.";return}U={name:A[em].name,email:em,role:r.value}}
+   else{const a=A[em];if(!a||a.h!==await sha(a.salt+pw.value)){msg.textContent="Wrong email or password";return}U={name:a.name,email:em,role:a.role}}
+   try{localStorage.setItem("fn_user",JSON.stringify(U))}catch(e){}}
+  $("#dl").close();head();toast(signup?"Account created. Welcome, "+first()+"!":"Welcome back, "+first()+"!")}catch(e){msg.textContent=e&&e.sb?e.message:API||SBON()?"Could not reach the server.":"Something went wrong. Please try again."}};
+ const sw=E("button","btn gh",signup?"I already have an account":"Create a new account");sw.style.cssText="margin:14px 0 0 8px";sw.onclick=()=>{signup=!signup;draw()};b.append(msg,ok,sw)});draw()}
+function logout(){SBS=null;try{localStorage.removeItem("fn_sb")}catch(e){}if(API)fetch("/api/auth/logout",{method:"POST"}).catch(()=>{});U=null;try{localStorage.removeItem("fn_user")}catch(e){}head();toast("You are logged out.")}
+$("#tl").onclick=()=>loginForm(false);$("#ts").onclick=()=>loginForm(true);
+$("#lg").onclick=()=>U?logout():loginForm();
+$("#prof").onclick=e=>{e.stopPropagation();const m=$("#pm");if(!U){loginForm();return}m.replaceChildren();const a=E("button",null,"My profile"),b=E("button",null,"Log out");
+ a.onclick=()=>{m.style.display="none";dlg("My profile",x=>{const n=ALL().filter(r=>r.by===U.name&&!r.seed).length;[["Name",U.name],["Role",RN[U.role]||U.role],["Email",U.email||"Not given"],["Entries added",n]].forEach(([k,v])=>{const p=E("p");p.append(E("span","mu",k+": "),E("b",null,v));x.append(p)})})};b.onclick=()=>{m.style.display="none";logout()};m.append(a,b);m.style.display=m.style.display==="block"?"none":"block"};
+document.addEventListener("click",()=>$("#pm").style.display="none");$("#dl").addEventListener("click",e=>{if(e.target===$("#dl"))$("#dl").close()});
+/* scoreboard */
+D.shops.forEach((s,i)=>$("#fs").append(new Option(s,i)));D.foods.forEach((f,i)=>$("#ff").append(new Option(f[1]+" "+f[0],i)));
+const SEED=D.seed.map(([s,c,o,w],i)=>({store:s,cat:c,ordered:o,wasted:w,out:false,ts:i,by:"Sample data",seed:true}));
+let live=[],mode="mem",dbr=null,loadApi=null;const ALL=()=>SEED.concat(live);
+function paint(){const rows=ALL(),to=rows.reduce((a,r)=>a+r.ordered,0),tw=rows.reduce((a,r)=>a+r.wasted,0),p=to?tw/to*100:null;
+ $("#nw").textContent=p==null?"–":p.toFixed(1)+"%";$("#nm").textContent=p==null?"No numbers yet. Add the first one!":p<=5?"Under our 5% goal. Nice!":"Our goal is 5%. Keep going.";
+ const by={};rows.forEach(r=>{(by[r.store]=by[r.store]||[0,0]);by[r.store][0]+=r.ordered;by[r.store][1]+=r.wasted});
+ const rk=Object.entries(by).map(([s,[o,w]])=>[+s,w/o*100]).sort((a,b)=>a[1]-b[1]);$("#bs").replaceChildren();
+ rk.forEach(([s,v],i)=>{const d=E("div","rk"),t=E("div","t"),b=E("i");t.style.cssText="height:10px;background:var(--soft);border-radius:99px;overflow:hidden";b.style.cssText="display:block;height:100%;width:"+Math.min(100,v/16*100)+"%;background:"+(v<=5?"var(--gr)":"var(--rd)");t.append(b);d.append(E("span",null,["🥇","🥈","🥉"][i]||i+1),E("span",null,D.shops[s].slice(0,8)+(D.shops[s].length>8?"…":"")),t,E("b",null,v.toFixed(1)+"%"));d.title=D.shops[s];$("#bs").append(d)});
+ $("#ra").replaceChildren();const rc=live.slice().sort((a,b)=>b.ts-a.ts).slice(0,5);if(!rc.length)$("#ra").append(E("p","mu","No live entries yet."));
+ rc.forEach(r=>{const d=E("div","rk");d.style.gridTemplateColumns="34px 1fr";d.append(E("span","av",ini(r.by||"?")),E("span",null,r.by+": "+D.shops[r.store]+", "+D.foods[r.cat][0]+" ("+r.wasted+" of "+r.ordered+" binned)"+(r.out?", ran out":"")));$("#ra").append(d)})}
+function status(){$("#sd").className="dot"+(mode==="cloud"||mode==="api"||mode==="sb"?"":" o");$("#st").textContent=sbBad&&mode!=="sb"?"Online database not reachable. Check the URL and key in index.html":mode==="sb"?"Online database connected · live":mode==="api"?"Connected to FreshNest API · live":mode==="cloud"?"Cloud database connected · live":"Saved in this browser"}
+function local(){mode="local";try{live=JSON.parse(localStorage.getItem("fn_rows")||"[]")}catch(e){live=[];mode="mem"}status();paint()}
+(async()=>{let done=false;const to=setTimeout(()=>{if(!done){done=true;local()}},10000); // give up after 10 seconds
+ if(SBON()){try{await sbStart();clearTimeout(to);done=true;mode="sb";status();setInterval(()=>sbLoad().catch(()=>{}),15000);return}catch(e){sbBad=true}}
+ try{const hr=await fetch("/api/health"); // 1) our own FreshNest API (when served by the Python backend)
+  if(hr.ok){loadApi=async()=>{const rs=await(await fetch("/api/records")).json();live=rs.map(r=>({store:D.shops.indexOf(r.store),cat:D.foods.findIndex(f=>f[0].toLowerCase()===r.food),ordered:r.ordered,wasted:r.wasted,out:!!r.ran_out,ts:r.created_at*1000,by:r.added_by})).filter(r=>r.store>=0&&r.cat>=0);paint()};
+   API=true;try{const me=await fetch("/api/auth/me");U=me.ok?await me.json():null}catch(e){U=null}head();await loadApi();clearTimeout(to);done=true;mode="api";status();setInterval(()=>loadApi().catch(()=>{}),15000);return}}catch(e){}
+ try{const c=window.claude&&await claude.use("db"); // 2) platform database, 3) browser storage (below)
+ if(done)return;if(!c)throw 0;dbr=c.collection("rows");
+  dbr.orderBy("ts","desc").limit(300).onSnapshot(s=>{clearTimeout(to);done=true;mode="cloud";live=s.docs.map(d=>d.data());status();paint()},()=>{clearTimeout(to);if(mode!=="cloud"){done=true;local()}})}
+ catch(e){clearTimeout(to);if(!done){done=true;local()}}})();
+$("#fb").onclick=async()=>{const m=$("#fm");if(!U){loginForm();return}const o=+$("#fo").value,w=+$("#fw").value;
+ if(!(o>0)){m.textContent="Please enter how many we ordered (more than 0).";return}if(!(w>=0)||w>o){m.textContent="Thrown away can’t be more than ordered.";return}
+ const r={store:+$("#fs").value,cat:+$("#ff").value,ordered:o,wasted:w,out:$("#fx").checked,ts:Date.now(),by:U.name};
+ try{if(mode==="sb"){await sbAdd(r);await sbLoad();m.textContent="Added. Thank you!"}else if(mode==="api"){const rr=await fetch("/api/records",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({store:D.shops[r.store],food:D.foods[r.cat][0].toLowerCase(),ordered:r.ordered,wasted:r.wasted,ran_out:r.out,added_by:r.by})});if(rr.status===401){U=null;head();loginForm();return}if(!rr.ok)throw 0;await loadApi();m.textContent="Added. Thank you!"}else if(mode==="cloud"&&dbr){await dbr.add(r);m.textContent="Added. Thank you!"}else{live.push(r);if(mode==="local"){localStorage.setItem("fn_rows",JSON.stringify(live));m.textContent="Added. Saved in this browser."}else m.textContent="Added. (Demo mode: numbers are not saved.)";paint()}}
+ catch(e){live.push(r);mode="mem";status();paint();m.textContent="Added. (Demo mode: numbers are not saved.)"}
+ $("#fo").value="";$("#fw").value="";$("#fx").checked=false};
+/* plan */
+D.plan.forEach(([e,t,w,x])=>{const c=E("div","card pl");c.append(E("span","em",e),E("h3",null,t),E("b",null,w),E("p","mu",x));$("#pp").append(c)});
+D.steps.forEach(([t,x])=>{const c=E("div","card st");c.append(E("h3",null,t),E("p","mu",x));$("#ro").append(c)});
+/* money */
+bars($("#mb2"),D.split,2.5,()=>"linear-gradient(90deg,var(--bl),var(--cy))",v=>v.toFixed(1));
+function money(){const pp=+$("#pp2").value,G=D.goal;$("#pv").textContent=pp;let cum=-G.budget,pts=[[0,cum]],pay=null;
+ for(let m=1;m<=24;m++){cum+=pp*G.perPoint/12*Math.min(1,m/12)-G.runCost/12; // yearly saving builds up evenly over 12 months, minus monthly running cost
+  pts.push([m,cum]);if(pay==null&&cum>=0)pay=m}
+ const ok=pay!=null&&pay<=G.payLimit,pb=$("#pb");pb.textContent=pay==null?"Not paid back in 24 months ❌":"Money back by month "+pay+(ok?" ✅":" ❌");pb.style.color=ok?"var(--gr)":"var(--rd)";
+ const sg=v=>(v<0?"−":"")+"Rs. "+Math.abs(v).toFixed(1)+" cr",mt=$("#mt");mt.replaceChildren();[[sg(pts[12][1]),"at month 12"],[sg(pts[24][1]),"at month 24"],[pay==null?"–":"Month "+pay,"payback"]].forEach(([v,l])=>{const d=E("div");d.append(E("b",null,v),l);mt.append(d)});
+ const svg=$("#ch"),N="http://www.w3.org/2000/svg",mk=(t,a,x)=>{const e=document.createElementNS(N,t);for(const k in a)e.setAttribute(k,a[k]);if(x)e.textContent=x;svg.append(e);return e};svg.replaceChildren();
+ const lo=Math.min(...pts.map(p=>p[1]),-1),hi=Math.max(...pts.map(p=>p[1]),1),X=m=>40+m/24*580,Y=v=>230-(v-lo)/(hi-lo)*210;
+ mk("line",{x1:40,x2:620,y1:Y(0),y2:Y(0),stroke:"#8FA3C7","stroke-dasharray":"2 4"});mk("text",{x:6,y:Y(0)+4},"0");
+ mk("line",{x1:X(18),x2:X(18),y1:10,y2:230,stroke:"#FF4D6D","stroke-dasharray":"6 4"});mk("text",{x:X(18)-30,y:12},"18-month limit");
+ mk("path",{d:pts.map((p,i)=>(i?"L":"M")+X(p[0])+" "+Y(p[1])).join(""),fill:"none",stroke:"#00E5FF","stroke-width":3});
+ if(pay!=null){mk("circle",{cx:X(pay),cy:Y(pts[pay][1]),r:6,fill:"#FFE14D"});mk("text",{x:X(pay)-18,y:Y(0)-12},"Month "+pay)}
+ [0,6,12,18,24].forEach(m=>mk("text",{x:X(m)-6,y:250},m))}
+$("#pp2").oninput=money;money();chips($("#pre"),["Small cut (1.5)","Medium cut (3)","Full goal (4)"],2,i=>{$("#pp2").value=[1.5,3,4][i];money()});
+/* risks */
+D.risks.forEach(([q,a])=>{const d=E("details");d.append(E("summary",null,q),E("p","mu",a));$("#rk").append(d)});
+/* nav, search, theme, drawer */
+const links=[...document.querySelectorAll("#nav a")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.dataset.id===e.target.id));const n=NAV.find(x=>x[0]===e.target.id);if(n)$("#cb").textContent=n[1]}}),{rootMargin:"-30% 0px -60% 0px"});
+document.querySelectorAll("main section").forEach(s=>io.observe(s));
+
+$("#menu").onclick=()=>$("#side").classList.toggle("open");$("#scrim").onclick=()=>$("#side").classList.remove("open");
+const hs=$("#hs"),hf=$("#hf");hs.add(new Option("All stores",""));hf.add(new Option("All foods",""));D.shops.forEach((s,i)=>hs.add(new Option(s,i)));D.foods.forEach((f,i)=>hf.add(new Option(f[1]+" "+f[0],i)));
+const paint0=paint,when=r=>r.seed?"Sample":new Date(r.ts).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
+function hist(){const bc=D.foods.map((f,i)=>{const r=ALL().filter(x=>x.cat===i),o=r.reduce((a,x)=>a+x.ordered,0),w=r.reduce((a,x)=>a+x.wasted,0);return[f[1]+" "+f[0],o?w/o*100:0]});bars($("#fb2"),bc,16,v=>v<=5?"var(--gr)":v>=12?"var(--rd)":"var(--bl)",v=>v.toFixed(1)+"%");
+ const rows=ALL().filter(r=>(hs.value===""||r.store===+hs.value)&&(hf.value===""||r.cat===+hf.value)).sort((a,b)=>b.ts-a.ts);
+ const o=rows.reduce((a,r)=>a+r.ordered,0),w=rows.reduce((a,r)=>a+r.wasted,0);$("#hc").textContent="Showing "+rows.length+" of "+ALL().length+" records ("+live.length+" added by managers, "+SEED.length+" sample).";
+ $("#hg").replaceChildren();[[rows.length,"records"],[o,"ordered"],[w,"thrown away"],[(o?w/o*100:0).toFixed(1)+"%","waste"],[rows.filter(r=>r.out).length,"ran out"]].forEach(([v,l])=>{const d=E("div");d.append(E("b",null,v),l);$("#hg").append(d)});
+ const t=$("#ht");t.replaceChildren();const h=E("tr");["When","Store","Food","Ordered","Binned","Waste","Ran out","By"].forEach(x=>h.append(E("th",null,x)));t.append(h);
+ rows.slice(0,300).forEach(r=>{const p=r.ordered?r.wasted/r.ordered*100:0,tr=E("tr");[when(r),D.shops[r.store],D.foods[r.cat][1]+" "+D.foods[r.cat][0],r.ordered,r.wasted,p.toFixed(1)+"%",r.out?"Yes":"No"].forEach(x=>tr.append(E("td",null,x)));const td=E("td"),g=E("span","tg "+(r.seed?"s":"l"),r.seed?"Sample":r.by);td.append(g);tr.append(td);t.append(tr)})}
+function drawMap(){const box=$("#sm");if(!box)return;box.replaceChildren();const by={};ALL().forEach(r=>{(by[r.store]=by[r.store]||[0,0,0]);by[r.store][0]+=r.ordered;by[r.store][1]+=r.wasted;if(r.out)by[r.store][2]++});
+ D.shops.forEach((n,i)=>{const[o,w,out]=by[i]||[0,0,0],p=o?w/o*100:null,c=p==null?"var(--mu)":p<=5?"var(--gr)":p<=9?"var(--or)":"var(--rd)",t=E("div","tile"),pc=E("div","tp",p==null?"–":p.toFixed(1)+"%");t.style.borderColor=c;pc.style.color=c;t.append(E("span",null,"📍"),E("b",null,n),pc,E("span","mu",out+" evening run-outs"));box.append(t)})}
+function drawGlide(){const svg=$("#gl");if(!svg)return;svg.replaceChildren();const N="http://www.w3.org/2000/svg",mk=(t,a,x)=>{const e=document.createElementNS(N,t);for(const k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;svg.append(e)};
+ const X=m=>50+m/12*560,Y=v=>220-(v-4)/6*190;[4,5,6,7,8,9,10].forEach(v=>{mk("line",{x1:50,x2:610,y1:Y(v),y2:Y(v),stroke:"#D8E1F0"});mk("text",{x:12,y:Y(v)+4},v+"%")});
+ mk("path",{d:"M"+X(0)+" "+Y(9)+"L"+X(12)+" "+Y(5),stroke:"#2F6BFF","stroke-width":3,fill:"none","stroke-dasharray":"6 4"});mk("circle",{cx:X(0),cy:Y(9),r:5,fill:"#2F6BFF"});mk("circle",{cx:X(12),cy:Y(5),r:5,fill:"#12A150"});mk("text",{x:X(12)-58,y:Y(5)-10},"Goal 5%");mk("text",{x:X(0)+8,y:Y(9)-10},"Plan starts at 9%");
+ const rows=ALL(),o=rows.reduce((a,r)=>a+r.ordered,0),w=rows.reduce((a,r)=>a+r.wasted,0);if(o){const p=w/o*100,v=Math.min(10,Math.max(4,p));mk("line",{x1:50,x2:610,y1:Y(v),y2:Y(v),stroke:"#FF9F1C","stroke-width":2});mk("text",{x:330,y:Y(v)-8},"Scoreboard now: "+p.toFixed(1)+"%")}
+ [0,3,6,9,12].forEach(m=>mk("text",{x:X(m)-16,y:244},"Month "+m))}
+paint=function(){paint0();hist();drawMap();drawGlide()};hs.onchange=hf.onchange=hist;
+$("#hd").onclick=async()=>{try{const d=window.claude&&await claude.use("downloads");if(!d){toast("Download isn’t available here.");return}const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+ const csv=["when,store,food,ordered,binned,ran_out,by"].concat(ALL().sort((a,b)=>b.ts-a.ts).map(r=>[r.seed?"sample":new Date(r.ts).toISOString(),D.shops[r.store],D.foods[r.cat][0],r.ordered,r.wasted,r.out?"yes":"no",r.by].map(q).join(","))).join("\n");await d.save({filename:"freshnest-records.csv",data:csv})}catch(e){toast("Could not save the file.")}};
+addEventListener("scroll",()=>{const h=document.documentElement,p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);$("#pg").style.width=p*100+"%";$("#up").style.display=h.scrollTop>600?"block":"none"},{passive:true});$("#up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+$("#cp").onclick=async()=>{try{await navigator.clipboard.writeText([$("#r1").innerText,$("#r2").innerText,$("#gain").innerText].join("\n\n"));toast("Copied to your clipboard.")}catch(e){toast("Couldn’t copy. Please select the text instead.")}};
+["#fo","#fw"].forEach(s=>$(s).addEventListener("keydown",e=>{if(e.key==="Enter")$("#fb").click()}));
+try{const l=JSON.parse(localStorage.getItem("fn_last")||"{}");if(l.s!=null)$("#fs").value=l.s;if(l.f!=null)$("#ff").value=l.f}catch(e){}
+["#fs","#ff"].forEach(s=>$(s).addEventListener("change",()=>{try{localStorage.setItem("fn_last",JSON.stringify({s:$("#fs").value,f:$("#ff").value}))}catch(e){}}));
+D.qa.forEach(([q,a])=>{const d=E("details");d.append(E("summary",null,q),E("p","mu",a));$("#jq").append(d)});
+head();status();paint();
+</script>
+</body></html>
